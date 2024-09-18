@@ -13,6 +13,7 @@ from "@nextui-org/navbar";
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@nextui-org/button';
+import { UserButton, useUser } from '@clerk/nextjs';
 
 const MenuList=[
   {
@@ -34,6 +35,8 @@ const MenuList=[
 ]
 
 function Header() {
+
+  const {user, isSignedIn}=useUser();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -57,7 +60,14 @@ function Header() {
                 ))}
             </NavbarContent>
             <NavbarContent justify='end'>
-              <Button color='primary' >Empezar ahora</Button>
+              <Link href={"/dashboard"}>
+              <Button color='primary' >
+                {isSignedIn?
+                "Panel de control":
+                "Empezar ahora"}
+                </Button>
+                </Link>
+                <UserButton />
             </NavbarContent>
             <NavbarMenu>
               {MenuList.map((item, index) =>(
