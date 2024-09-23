@@ -22,7 +22,7 @@ const MenuList=[
   },
   {
     name:"Crear historia",
-    path:"/crear-historia"
+    path:"/create-history"
   },
   {
     name:"Explorar historia",
