@@ -11,6 +11,7 @@ import { StoryData } from '@/config/schema'
 //@ts-ignore
 import uuid4 from 'uuid4'
 import CustomLoader from './_components/CustomLoader'
+import axios from 'axios'
 
 const CREATE_STORY_PROMPT=process.env.NEXT_PUBLIC_CREATE_STORY_PROMPT
 
@@ -47,10 +48,16 @@ function CreateStory() {
     .replace("{storySubject}",formData?.storySubject??"")
     .replace("{imageStyle}",formData?.imageStyle??"")
     try{
-      const result = await chatSession.sendMessage(FINAL_PROMPT)
+      const result = await chatSession.sendMessage(FINAL_PROMPT);
+  
+
       console.log(result?.response.text());
-      const resp=await SaveInDB(result?.response.text())
-      console.log(resp)
+
+
+
+      
+       const resp=await SaveInDB(result?.response.text())
+       console.log(resp)
       setLoading(false);
     } catch(e){
       console.log(e)
